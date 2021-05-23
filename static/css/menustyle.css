@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+*
+{
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+}
+
+a{
+    text-decoration: none;
+}
+
+.restaurant-main {
+  padding-top: 8vh;
+  min-height: 500px;
+}
+
+.restaurant {
+    width: 18%;
+    position: relative;
+    box-shadow: 0 2px 7px #dfdfdf;
+    background: #fafafa;
+    display: inline-block;
+    margin: 0.5%;
+    text-align: left;
+}
+
+
+.restaurant-box{
+    margin-bottom: 10px;
+    float: left;
+    text-align: center;
+    width: 80%;
+}
+
+.restaurant-links {
+    text-align: right;
+}
+
+.restaurant-links .fa-heart {
+    display: inline-block;
+    margin-left: 5px;
+    color: #e1e1e1;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+.restaurant-links .fa-shopping-cart {
+    display: inline-block;
+    margin-left: 5px;
+    color: #e1e1e1;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+.restaurant-links .fa-heart:hover {
+    color: #ff0066;
+}
+
+.restaurant-links .fa-shopping-cart:hover {
+    color: #000;
+}
+
+.fa-trash:hover {
+    color: #f44336;
+}
+
+.restaurant-hide {
+    text-align: left;
+}
+
+.restaurant-hide .fa-eye-slash:hover {
+    color: #cfd8dc;
+}
+
+.restaurant-hide .fa-eye:hover {
+    color: #cfd8dc;
+}
+
+.search-current{
+    margin-right: 15px;
+}
+
+.addmenu-box{
+    text-align: left;
+    margin-left: 15px;
+}
+
+.fa-pen{
+    color: gray;
+    margin-right: 32px;
+}
+
+.fa-trash-alt{
+    color: gray;
+    margin-right: 30px;
+}
+.fa-exclamation{
+    color: gray;
+    margin-right: 30px;
+}
+
+.dropdown-item p{
+    display: inline-block;
+    color: gray;
+}
+
+.img-container{
+    object-fit: cover;
+}
+
+.restaurant-manual{
+    display: inline-block;
+    padding: 15px 30px 0;
+    margin-bottom: 10px;
+}
+
+.custom-control{
+    text-align: center;
+}
+
+#formarea1{
+    float: left;
+    width: 50%;
+}

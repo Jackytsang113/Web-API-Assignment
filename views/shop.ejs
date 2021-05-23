@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/menustyle.css">
+    <link rel="stylesheet" href="css/footer.css">
+      <!-- main css -->
+     <link rel="stylesheet" href="css/style.css">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="css/all.css">
+    <title>FoodShop</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">FoodShop</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="shop">Shop</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="order">Order</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="favorite">Favorite</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="userName" href="profile"><%=userName%></a>
+              </li>
+            </ul>
+            <form class="d-flex">
+              <button type="button" class="btn btn-warning" id="login_btn">Login</button>
+              <button type="button" class="btn btn-danger" id="logout_btn" onclick="logout()">Logout</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+  <!-- store -->
+  <section id="store" class="store py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-10 mx-auto col-md-6">
+          <form>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder='Search' id="search-item">
+              <div class="input-group-prepend ">
+                <button class="btn btn-primary" id="search-icon">Search</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- store  items-->
+      <div class="row" class="store-items" id="store-items">
+        <%foodList.forEach(food => {%>
+        <!-- single item -->
+        <div class="col-10 col-sm-6 col-lg-4 mx-auto my-3 store-item sweets" data-item="sweets">
+          <div class="card ">
+            <div class="img-container">
+              <img src="img/<%= food.foodname %>.jpg" class="card-img-top store-img" alt="">
+            </div>
+            <div class="card-body">
+              <div class="card-text d-flex justify-content-between text-capitalize">
+                <input type="hidden" id="<%= food.foodname %>Id" name="<%= food.foodname %>foodId" value="<%= food._id %>">
+                <h5 id="store-item-name"><%= food.foodname %></h5>
+                <h5 class="store-item-value">$ <strong id="store-item-price" class="font-weight-bold"><%= food.price %></strong></h5>
+              </div>
+              <div class="food-description"><%= food.description %></div>
+              <div class="restaurant-links">
+                <button type="button" class="btn btn-outline-primary" href="#newFavoriteModal" data-toggle="modal" onclick="newfavorite()" >Favorite</button>
+                <button type="button" class="btn btn-outline-success" onclick="orderfood()">Order</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end of card-->
+        <%})%>
+      </div>
+    </div>
+  </section>
+  <!--end of store items -->
+    <!-- Edit Modal HTML -->
+    <div id="newFavoriteModal" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">New Favorite</h5>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Food Name</label>
+              <input type="text" class="form-control" id="foodname_modal" value="food name" readonly>
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <input type="text" class="form-control" id="description_modal" value="description" readonly>
+            </div>
+            <div class="form-group">
+              <label>Comment</label>
+              <input type="text" class="form-control" id="comment_modal" placeholder="Type the favorite comment">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="submit" class="btn btn-primary" value="OK" onclick="addfavorite()">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Edit Modal HTML -->
+
+    <footer>
+      <div class="footer-current">
+        <div id="tripleARow">
+          <ul>
+            <h2>About</h2>
+            <li><a href="">FoodShop</a></li>
+            <li><a href="">Media Reports</a></li>
+            <li><a href="">Technical Log</a></li>
+            <li><a href="">Design Blog</a></li>
+            <li><a href="">Career Opportunities</a></li>
+            <li><a href="">Restaurant Registration</a></li>
+          </ul>
+        </div>
+        <div id="tripleARow">
+          <ul>
+            <h2>Legal</h2>
+            <li><a href="">Terms of Use</a></li>
+            <li><a href="">Privacy Policy and Terms</a></li>
+            <li><a href="">Cookie Information</a></li>
+          </ul>
+        </div>
+        <div id="tripleARow">
+          <ul>
+            <h2>Help</h2>
+            <li><a href="">Contact Method</a></li>
+            <li><a href="">Common Problem</a></li>
+            <li><a href="">Dishes</a></li>
+            <li><a href="">Sitemap</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-statement">
+        <p>Copyright &copy;
+          <script>document.write(new Date().getFullYear());</script>,TSANG Ho Yin</p>
+      </div>
+    </footer>
+
+  <input type="hidden" id="islogin" value="<%= islogin %>">
+  <script>
+    console.log(document.getElementById('islogin').value);
+    if(document.getElementById('islogin').value == "true"){
+      document.getElementById('login_btn').style.display = 'none';
+      document.getElementById('logout_btn').style.display = 'block';
+    }else{
+      document.getElementById('login_btn').style.display = 'block';
+      document.getElementById('logout_btn').style.display = 'none';
+    }
+
+    async function newfavorite(){
+      event.preventDefault();
+      const foodname = event.target.parentElement.previousElementSibling.previousElementSibling.children[1].textContent;
+      const description = event.target.parentElement.previousElementSibling.textContent;
+
+      document.getElementById("foodname_modal").value = foodname;
+      document.getElementById("description_modal").value = description;
+    }
+
+    async function addfavorite(){
+      event.preventDefault();
+      const username = document.getElementById("userName").textContent;
+      const foodname = document.getElementById("foodname_modal").value;
+      const description = document.getElementById("description_modal").value;
+      const comment = document.getElementById("comment_modal").value;
+
+      const result = await fetch('/api/favorite',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username,
+                    foodname,
+                    description,
+                    comment
+                })
+            }).then((res) => res.json())
+
+            if(result.status === 'ok'){
+                alert('Success add Favorite!')
+                document.getElementById("comment_modal").value = "";
+            }else{
+                alert(result.error)
+            }
+    }
+
+
+    async function orderfood(){
+      event.preventDefault();
+      const username = document.getElementById("userName").textContent
+
+      const foodname = event.target.parentElement.previousElementSibling.previousElementSibling.children[1].textContent;
+
+      const price = event.target.parentElement.previousElementSibling.previousElementSibling.children[2].children[0].textContent;
+
+      const result = await fetch('/api/order',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username,
+                    foodname,
+                    price
+                })
+            }).then((res) => res.json())
+
+            if(result.status === 'ok'){
+                alert('Success order')
+            }else{
+                alert(result.error)
+            }
+    }
+
+    async function logout(){
+            event.preventDefault();
+            const result = await fetch('/api/logout',{
+                method: 'GET'
+            }).then((res) => res.json())
+
+            if(result.status === 'ok'){
+                location = "login"
+                alert('Success logout')
+            }else{
+                alert(result.error)
+            }
+        }
+        
+  </script>
+    <!-- jquery -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <!-- script js -->
+</body>
+</html>

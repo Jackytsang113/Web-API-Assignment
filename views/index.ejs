@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/menustyle.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <title>FoodShop</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">FoodShop</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="shop" onclick="gotologin()">Shop</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="order" onclick="gotologin()">Order</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="favorite" onclick="gotologin()">Favorite</a>
+              </li>
+            </ul>
+            <form class="d-flex">
+              <a type="button" class="btn btn-warning" id="login_btn" href="login">Login</a>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+  <!-- store -->
+  <section id="store" class="store py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-10 mx-auto col-md-6">
+          <form>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder='Search' id="search-item">
+              <div class="input-group-prepend ">
+                <button class="btn btn-primary" id="search-icon">Search</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- store  items-->
+      <div class="row" class="store-items" id="store-items">
+        <%foodList.forEach(food => {%>
+        <!-- single item -->
+        <div class="col-10 col-sm-6 col-lg-4 mx-auto my-3 store-item sweets" data-item="sweets">
+          <div class="card ">
+            <div class="img-container">
+              <img src="img/<%= food.foodname %>.jpg" class="card-img-top store-img" alt="">
+            </div>
+            <div class="card-body">
+              <div class="card-text d-flex justify-content-between text-capitalize">
+                <input type="hidden" id="<%= food.foodname %>Id" name="<%= food.foodname %>foodId" value="<%= food._id %>">
+                <h5 id="store-item-name"><%= food.foodname %></h5>
+                <h5 class="store-item-value">$ <strong id="store-item-price" class="font-weight-bold"><%= food.price %></strong></h5>
+              </div>
+              <div class="food-description"><%= food.description %></div>
+              <div class="restaurant-links">
+                <button type="button" class="btn btn-outline-primary" href="#newFavoriteModal" data-toggle="modal" onclick="gotologin()" >Favorite</button>
+                <button type="button" class="btn btn-outline-success" onclick="gotologin()">Order</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end of card-->
+        <%})%>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-current">
+      <div id="tripleARow">
+        <ul>
+          <h2>About</h2>
+          <li><a href="">FoodShop</a></li>
+          <li><a href="">Media Reports</a></li>
+          <li><a href="">Technical Log</a></li>
+          <li><a href="">Design Blog</a></li>
+          <li><a href="">Career Opportunities</a></li>
+          <li><a href="">Restaurant Registration</a></li>
+        </ul>
+      </div>
+      <div id="tripleARow">
+        <ul>
+          <h2>Legal</h2>
+          <li><a href="">Terms of Use</a></li>
+          <li><a href="">Privacy Policy and Terms</a></li>
+          <li><a href="">Cookie Information</a></li>
+        </ul>
+      </div>
+      <div id="tripleARow">
+        <ul>
+          <h2>Help</h2>
+          <li><a href="">Contact Method</a></li>
+          <li><a href="">Common Problem</a></li>
+          <li><a href="">Dishes</a></li>
+          <li><a href="">Sitemap</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-statement">
+      <p>Copyright &copy;
+        <script>document.write(new Date().getFullYear());</script>,TSANG Ho Yin</p>
+    </div>
+  </footer>
+  <!--end of store items -->
+    <script>
+      function gotologin(){
+        location = "login"
+        alert("Please login to account first!");
+      }
+
+    </script>
+
+    <!-- jquery -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <!-- script js -->
+
+    <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+</body>
+</html>

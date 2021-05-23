@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/tableFrom.css">
+    <link rel="stylesheet" href="css/loginstyle.css" />
+    <link rel="stylesheet" href="css/footer.css">
+    <title>FoodShop</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">FoodShop</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="shop">Shop</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="order">Order</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="favorite">Favorite</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="userName" href="profile"><%=userName%></a>
+              </li>
+            </ul>
+            <form class="d-flex">
+              <p></p>
+              <button type="button" class="btn btn-warning" id="login_btn">Login</button>
+              <button type="button" class="btn btn-danger" id="logout_btn" onclick="logout()">Logout</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="table-wrapper">
+          <div class="table-title">
+            <div class="row">
+              <div class="col-sm-6">
+                <h1>Favorite</h1>
+              </div>
+            </div>
+          </div>
+    
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">FoodName</th>
+                <th scope="col">Description</th>
+                <th scope="col">Comment</th>
+                <th scope="col" colspan="2">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%var count = 1;%>
+              <%favoriteList.forEach(favorite => {%>
+              <tr>
+                <input type="hidden" id="favoriteId" value="<%= favorite._id %>">
+                <th scope="row"><%=count++%></th>
+                <td><%= favorite.foodname %></td>
+                <td><%= favorite.description %></td>
+                <td><%= favorite.comment %></td>
+                <td>
+                  <button type="button" class="btn btn-success" href="#editFavoriteModal" data-toggle="modal" onclick="getfavoriteValue()">Edit</button>
+                  <button type="button" class="btn btn-danger" onclick="favoritedelete()">Delete</button >
+                </td>
+              </tr>
+              <%})%>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <footer>
+        <div class="footer-current">
+          <div id="tripleARow">
+            <ul>
+              <h2>About</h2>
+              <li><a href="">FoodShop</a></li>
+              <li><a href="">Media Reports</a></li>
+              <li><a href="">Technical Log</a></li>
+              <li><a href="">Design Blog</a></li>
+              <li><a href="">Career Opportunities</a></li>
+              <li><a href="">Restaurant Registration</a></li>
+            </ul>
+          </div>
+          <div id="tripleARow">
+            <ul>
+              <h2>Legal</h2>
+              <li><a href="">Terms of Use</a></li>
+              <li><a href="">Privacy Policy and Terms</a></li>
+              <li><a href="">Cookie Information</a></li>
+            </ul>
+          </div>
+          <div id="tripleARow">
+            <ul>
+              <h2>Help</h2>
+              <li><a href="">Contact Method</a></li>
+              <li><a href="">Common Problem</a></li>
+              <li><a href="">Dishes</a></li>
+              <li><a href="">Sitemap</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-statement">
+          <p>Copyright &copy;
+            <script>document.write(new Date().getFullYear());</script>,TSANG Ho Yin</p>
+        </div>
+      </footer>
+
+    <!-- Edit Modal HTML -->
+    <div id="editFavoriteModal" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">edit Favorite</h5>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Food Name</label>
+              <input type="text" class="form-control" id="foodname_modal" value="food name" readonly>
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <input type="text" class="form-control" id="description_modal" value="description" readonly>
+            </div>
+            <div class="form-group">
+              <label>Comment</label>
+              <input type="text" class="form-control" id="comment_modal" placeholder="Type the favorite comment">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="submit" class="btn btn-primary" value="OK" onclick="editfavorite()">
+            <input type="hidden" id="favoriteId_modal" value="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Edit Modal HTML -->
+
+    
+  <input type="hidden" id="islogin" value="<%= islogin %>">
+      <script>
+      console.log(document.getElementById('islogin').value);
+      if(document.getElementById('islogin').value == "true"){
+        document.getElementById('login_btn').style.display = 'none';
+        document.getElementById('logout_btn').style.display = 'block';
+      }else{
+        document.getElementById('login_btn').style.display = 'block';
+        document.getElementById('logout_btn').style.display = 'none';
+      }
+
+        async function getfavoriteValue(){
+          event.preventDefault();
+          const id = event.target.parentElement.parentElement.children[0].value;
+
+          const foodname = event.target.parentElement.parentElement.children[2].textContent;
+
+          const description = event.target.parentElement.parentElement.children[3].textContent;
+
+          const comment = event.target.parentElement.parentElement.children[4].textContent;
+
+          document.getElementById("favoriteId_modal").value = id;
+          document.getElementById("foodname_modal").value = foodname;
+          document.getElementById("description_modal").value = description;
+          document.getElementById("comment_modal").value = comment;
+        }
+
+        async function editfavorite(){
+          event.preventDefault();
+
+          const id = document.getElementById("favoriteId_modal").value;
+          const comment = document.getElementById("comment_modal").value;
+
+          const result = await fetch('/api/editfavorite',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id,
+                    comment
+                })
+            }).then((res) => res.json())
+
+            if(result.status === 'ok'){
+                alert('Success edit favorite')
+                location.reload()
+            }else{
+                alert(result.error)
+            }
+        }
+
+        async function favoritedelete(){
+          event.preventDefault();
+
+          const id = event.target.parentElement.parentElement.children[0].value;
+
+          const result = await fetch('/api/delfavorite',{
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id
+                })
+            }).then((res) => res.json())
+
+            if(result.status === 'ok'){
+                alert('Success delete favorite')
+                location.reload()
+            }else{
+                alert(result.error)
+            }
+      }
+
+      async function logout(){
+            event.preventDefault();
+            const result = await fetch('/api/logout',{
+                method: 'GET'
+            }).then((res) => res.json())
+
+            if(result.status === 'ok'){
+                location = "login"
+                alert('Success logout')
+            }else{
+                alert(result.error)
+            }
+        }
+      </script>
+    <!-- jquery -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <!-- script js -->
+
+    <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+    <script>
+        $('.message a').click(function () {
+            $('.form div').animate({ height: "toggle", opacity: "toggle" }, "slow");
+        });
+    </script>
+</body>
+</html>

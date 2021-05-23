@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/nav.css" />
+    <link rel="stylesheet" href="./css/loginstyle.css" />
+    <link rel="stylesheet" href="css/footer.css">
+    <title>FoodShop</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">FoodShop</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="shop" onclick="gotologin()">Shop</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="order" onclick="gotologin()">Order</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="favorite" onclick="gotologin()">Favorite</a>
+              </li>
+            </ul>
+            <form class="d-flex">
+                <button type="button" class="btn btn-warning" id="login_btn">Login</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+      <div class="login-page">
+        <div class="form">
+            <div class="register-from" id="reg-form">
+                <h1>Sign up</h1>
+                <br />
+                <input type="text" id="user" placeholder="Username" required>
+                <input type="text" id="fullname" placeholder="Enter Your Name" required />
+                <input type="number" id="phone" placeholder="Enter Phone Number" required />
+                <input type="email" id="email" placeholder="Enter Email" required />
+                <input type="password" id="pwd" placeholder="Password" required />
+                <input type="password" id="repwd" placeholder="Re-Enter Password" required />
+                <input type="submit" value="Submit" id="Submit" onclick="registerUser()" />
+                <p class="message">Already Registered? <a href="#">Login</a>
+                </p>
+            </div>
+
+            <div class="login-from">
+                <h1>Login</h1>
+                <br />
+                <input type="text" id="username" placeholder="Username" />
+                <input type="password" id="password" placeholder="Password" />
+                <input type="submit" value="Login" id="Login" onclick="login()" />
+                <p class="message">Not Registered? <a href="#">Register</a>
+                </p>
+                <div id="loadPos"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-current">
+          <div id="tripleARow">
+            <ul>
+              <h2>About</h2>
+              <li><a href="">FoodShop</a></li>
+              <li><a href="">Media Reports</a></li>
+              <li><a href="">Technical Log</a></li>
+              <li><a href="">Design Blog</a></li>
+              <li><a href="">Career Opportunities</a></li>
+              <li><a href="">Restaurant Registration</a></li>
+            </ul>
+          </div>
+          <div id="tripleARow">
+            <ul>
+              <h2>Legal</h2>
+              <li><a href="">Terms of Use</a></li>
+              <li><a href="">Privacy Policy and Terms</a></li>
+              <li><a href="">Cookie Information</a></li>
+            </ul>
+          </div>
+          <div id="tripleARow">
+            <ul>
+              <h2>Help</h2>
+              <li><a href="">Contact Method</a></li>
+              <li><a href="">Common Problem</a></li>
+              <li><a href="">Dishes</a></li>
+              <li><a href="">Sitemap</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-statement">
+          <p>Copyright &copy;
+            <script>document.write(new Date().getFullYear());</script>,TSANG Ho Yin</p>
+        </div>
+      </footer>
+    <script>
+        async function registerUser(){
+            event.preventDefault();
+            const username = document.getElementById('user').value;
+            const fullname = document.getElementById('fullname').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('pwd').value;
+            const repassword = document.getElementById('repwd').value;
+
+            const result = await fetch('/api/register',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username,
+                    fullname,
+                    phone,
+                    email,
+                    password,
+                    repassword
+                })
+            }).then((res) => res.json())
+
+            if(result.status === 'ok'){
+                alert('Success create account')
+                location = "login"
+            }else{
+                alert(result.error)
+            }
+        }
+
+        function gotologin(){
+            location = "login"
+            alert("Please login to account first!");
+        }
+
+
+        async function login(){
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const result = await fetch('/api/login',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username,
+                    password
+                })
+            }).then((res) => res.json())
+
+            if(result.status === 'ok'){
+                location = "shop"
+                console.log('Got the token: ', result.data)
+                localStorage.setItem('token', result.data)
+                document.getElementById('login_btn').style.display = 'none';
+                document.getElementById('logout_btn').style.display = 'block';
+                alert('Success login')
+            }else{
+                alert(result.error)
+            }
+        }
+
+        async function logout(){
+            event.preventDefault();
+            const result = await fetch('/api/logout',{
+                method: 'GET'
+            }).then((res) => res.json())
+
+            if(result.status === 'ok'){
+                location = "shop"
+                alert('Success logout')
+            }else{
+                alert(result.error)
+            }
+        }
+    </script>
+
+    <!-- jquery -->
+    <script src="./js/jquery-3.3.1.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <!-- script js -->
+    
+    <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+    <script>
+        $('.message a').click(function () {
+            $('.form div').animate({ height: "toggle", opacity: "toggle" }, "slow");
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+body
+{
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color:#000;
+    margin: 0;
+	padding: 0;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/*===============================FORM========================================*/
+.login-page .form{
+	position: relative;
+	z-index: 1;
+	background-color:#85C1E9;
+	max-width: 480px;
+	margin: 20vh auto 100px;
+	padding: 45px;
+	text-align: center;
+}
+
+.login-page .form img{
+	width: 90px;
+	height: auto;
+}
+
+.login-page .form h1{
+    color: #fff;
+    font-size: 40px;
+}
+
+.login-page .form input{
+	font-family: "Roboto", sans-serif;
+	outline: 1;
+	background-color: #f2f2f2;
+	width: 100%;
+	border: 0;
+	margin: 0 0 15px;
+	padding: 15px;
+	box-sizing: border-box;
+	font-size: 14px;
+}
+
+.login-page .form input[type="submit"]{
+	font-family: "Roboto",sans-serif;
+	outline: 0;
+	background-color: #2E86C1;
+	border-radius: 30px; 
+	width: 100%;
+	border: 0; 
+	padding: 15px;
+	color: #fff;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+.login-page .form input[type="submit"]:hover{
+	opacity: 0.8;
+}
+
+.login-page .form .message{
+	margin: 15px 0 0;
+	color: #fff;
+	font-size: 12px;
+}
+
+.login-page .form .message a{
+	color: #2874A6;
+	text-decoration: none;
+	font-size: 14px;
+	margin-left: 5px;
+}
+
+.login-page .form .register-from{
+	display: none;
+}
+
+.login-page .form img {
+    position: absolute;
+    top: -50px;
+    left: calc(50% - 50px);
+    width: 100px;
+    background: rgba(255,255,255, 0.8);
+    border-radius: 50%;
+}
+

@@ -1,0 +1,62 @@
+/* .container{
+    margin-top: 15vh;
+} */
+
+.table-wrapper {
+    background: #f1f1f1;
+    padding: 20px 25px;
+    margin: 30px 0;
+    border-radius: 5px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+.table-title {        
+    padding-bottom: 15px;
+    background: #2874A6;
+    color: #fff;
+    padding: 16px 30px;
+    margin: -20px -25px 10px;
+    border-radius: 5px 5px 0 0;
+}
+
+.table-title h1 {
+    margin: 5px 0 0;
+    font-size: 30px;
+}
+
+.table-title .btn {
+    float: right;
+    font-size: 18px;
+    margin-left: 20px;
+}
+
+table.table th i {
+    font-size: 13px;
+    margin: 0 5px;
+    cursor: pointer;
+}	
+
+table.table td:last-child i {
+    opacity: 0.9;
+    font-size: 20px;
+    margin: 0 5px;
+}
+
+table.table td .edit {
+    color: #FFC107;
+}
+table.table td a.delete {
+    color: #F44336;
+}
+table.table td a.accept {
+    color: #38cf51;
+}
+table.table td a.cancel {
+    color: #F44336;
+}
+
+table.table tr th:first-child {
+    width: 60px;
+}
+table.table tr th:last-child {
+    width: 100px;
+}
